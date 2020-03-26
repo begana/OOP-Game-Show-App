@@ -30,12 +30,12 @@
          selectedPhrase.addPhraseToDisplay();
          this.activePhrase = selectedPhrase;
 
-         
-        
      }
 
      getRandomPhrase(){
+
          return this.phrases[Math.floor(Math.random() * this.phrases.length)];
+         
      }
 
      handleInteraction(){}

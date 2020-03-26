@@ -9,6 +9,3 @@ resetButton.addEventListener('click', () =>{
     game.startGame();
 })
 
-let phrase = new Phrase();
-phrase.checkLetter();
-

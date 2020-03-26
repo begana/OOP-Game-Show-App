@@ -13,31 +13,39 @@
          const split = this.phrase.split("");
 
          split.forEach( character => {
+
             const li = document.createElement('li');
             phraseDiv.appendChild(li);
             li.textContent = character;
 
              if( character === " "){
-                li.className = 'space';
+                li.className = 'hide space';
              } else {
                 li.className = `hide letter ${character}`;
              }
+
          });
      }
 
-     checkLetter(){
+     checkLetter(letter){
 
-        const key = document.querySelector('#qwerty');
-        key.addEventListener('click', (e) => {
-            if( this.phrase === e.target){
-                console.log("true");
-            } else {
-                console.log("false");
-            }
-        });
+        if(this.phrase.includes(letter)){
+            return true;
+        } else { 
+            return false;
+        }
+        
      }
 
-     showMatchedLtter(){
+     showMatchedLetter(letter){
+        
+        const phraseLetters = document.querySelectorAll('.letter');
+        console.log(phraseLetters);
+        phraseLetters.forEach( phraseLetter => {
+            if(phraseLetter.includes(letter)){
+                phraseLetter.className.replace('hide','show');
+            }
+        });
 
      }
  }
