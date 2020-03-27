@@ -12,11 +12,11 @@
      createPhrase(){
 
          const createPhrase = [
-             new Phrase('change the world by being yourself'),
-             new Phrase('every moment is a fresh beginning'),
-             new Phrase('never regret anything that made you smile'),
-             new Phrase('die with memories not dreams'),
-             new Phrase('everything you can imagine is real')
+             new Phrase('construction'),
+             new Phrase('instruction'),
+             new Phrase('assignment'),
+             new Phrase('instantiate'),
+             new Phrase('indicate')
         ];
          return createPhrase;
      }
@@ -35,14 +35,27 @@
      getRandomPhrase(){
 
          return this.phrases[Math.floor(Math.random() * this.phrases.length)];
-         
+
      }
 
      handleInteraction(){}
 
      removeLife(){}
 
-     checkForWin(){}
+     checkForWin(){
+        
+        const phraseLetters = document.querySelectorAll('.letter');
+
+        phraseLetters.forEach( matchedLetter => {
+            if( matchedLetter.className.includes('hide')){
+                return false;
+            } else {
+                return true;
+            }
+        })
+
+        
+     }
 
      gameOver(){}
  }
