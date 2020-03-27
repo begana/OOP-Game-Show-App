@@ -46,7 +46,11 @@
         const phraseLetters = document.querySelectorAll('.letter');
         console.log(phraseLetters);
 
-        phraseLetters.className = "show";
+        phraseLetters.forEach( phraseLetter => {
+            if( phraseLetter === letter ){
+                phraseLetter.className.replace = ('hide', 'show');
+            }
+        });
 
      }
  }
