@@ -27,6 +27,8 @@
          });
      }
 
+
+
      checkLetter(letter){
 
         if(this.phrase.includes(letter)){
@@ -38,19 +40,22 @@
      }
 
 
+
+
      /* to check the code, copy and paste this code on console
      game.activePhrase.showMatchedLetter('a')
      */ 
      showMatchedLetter(letter){
-        
+
         const phraseLetters = document.querySelectorAll('.letter');
         console.log(phraseLetters);
 
         phraseLetters.forEach( phraseLetter => {
-            if( phraseLetter === letter ){
-                phraseLetter.className.replace = ('hide', 'show');
+            if(phraseLetter.textContent === letter){
+                phraseLetter.className = 'show';
             }
-        });
+            
+        })
 
      }
  }
