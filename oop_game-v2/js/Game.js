@@ -3,14 +3,16 @@
  * Game.js */
 
  class Game {
+
      constructor(){
+
          this.missed = 0;
          this.phrases = this.createPhrase();
          this.activePhrase = null;   
      }
 
-     createPhrase(){
 
+     createPhrase(){
          const createPhrase = [
              new Phrase('construction'),
              new Phrase('instruction'),
@@ -21,16 +23,20 @@
          return createPhrase;
      }
 
+
      startGame(){
    
          const overlay = document.querySelector('#overlay');
+         const selectedPhrase = this.getRandomPhrase();
+         
          overlay.style.display = 'none';
 
-         const selectedPhrase = this.getRandomPhrase();
          selectedPhrase.addPhraseToDisplay();
+
          this.activePhrase = selectedPhrase;
 
      }
+
 
      getRandomPhrase(){
 
@@ -38,24 +44,43 @@
 
      }
 
+
      handleInteraction(){}
 
-     removeLife(){}
+     
+     removeLife(){
+
+        this.missed += 1;
+        const scoreboard = document.querySelector('#scoreboard ol');
+        const life = document.querySelector('.tries');
+
+        scoreboard.removeChild(life);
+
+        if( this.missed === 5 ){
+            this.gameOver();
+        }
+
+        console.log( this.missed );
+        console.log( scoreboard );
+        console.log( life );
+     }
+
 
      checkForWin(){
-        
-        const phraseLetters = document.querySelectorAll('.letter');
 
-        phraseLetters.forEach( matchedLetter => {
-            if( matchedLetter.className.includes('hide')){
-                return false;
-            } else {
-                return true;
-            }
-        })
+        const matchedLetters = document.querySelectorAll('.show');
+        const matched = matchedLetters.length;
+        const givenPhrase = this.activePhrase.phrase.length;
 
+        if( matched === givenPhrase ){
+            return true;
+        } else {
+            return false;
+        }
         
      }
 
-     gameOver(){}
+     gameOver(){
+         
+     }
  }
