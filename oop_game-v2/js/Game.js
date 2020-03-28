@@ -57,12 +57,9 @@
         scoreboard.removeChild(life);
 
         if( this.missed === 5 ){
-            this.gameOver();
+            this.gameOver(false);
         }
 
-        console.log( this.missed );
-        console.log( scoreboard );
-        console.log( life );
      }
 
 
@@ -80,7 +77,20 @@
         
      }
 
-     gameOver(){
-         
+     gameOver(gameWon){
+
+        const overlay = document.querySelector('#overlay');
+        const gameOverMsg = document.querySelector('#game-over-message');
+
+        if(gameWon === true){
+            overlay.className = 'win';
+            gameOverMsg.textContent = "Congratulation! You Win!"
+            overlay.style.display = 'block';
+        } else {
+            overlay.className = 'lose';
+            gameOverMsg.textContent = "It's Too Bad! Try Again!"
+            overlay.style.display = 'block';
+        }
+        
      }
  }
