@@ -8,18 +8,21 @@ class Game {
 
     this.missed = 0;
     this.phrases = this.createPhrase();
-    this.activePhrase = null;   
+    this.activePhrase = null;
+
     }
 
 
     createPhrase(){
+
         const createPhrase = [
-            new Phrase('i love you'),
-            new Phrase('stay at home'),
-            new Phrase('wash your hands'),
-            new Phrase('step by step'),
-            new Phrase('love yourself')
+            new Phrase('indicate'),
+            new Phrase('instantiate'),
+            new Phrase('componant'),
+            new Phrase('associate'),
+            new Phrase('assignment')
         ];
+
         return createPhrase;
     }
 
@@ -50,16 +53,16 @@ class Game {
         button.disabled = true;
     
 
-        if(this.activePhrase.checkLetter(button.textContent) === false){
+        if( this.activePhrase.checkLetter(button.textContent) === false ){
             button.className = 'wrong';
             this.removeLife();
         } else {
             button.className = 'chosen';
-            this.activePhrase.showMatchedLetter(button.textContent);
+            this.activePhrase.showMatchedLetter( button.textContent );
             this.checkForWin();
         }
 
-        if( this.checkForWin() === true){
+        if( this.checkForWin() === true ){
             this.gameOver(true);
         }
 
@@ -72,9 +75,6 @@ class Game {
         const scoreboard = document.querySelector('#scoreboard ol');
         const life = document.querySelector('img[src="images/liveHeart.png"]');
         life.src="images/lostHeart.png";
-        
-
-
         
         if( this.missed === 5 ){
             this.gameOver(false);
@@ -105,7 +105,7 @@ class Game {
         const buttons = document.querySelectorAll('button');
         const lostLifes = document.querySelectorAll('img[src="images/lostHeart.png"]');
 
-        if(gameWon === true){
+        if( gameWon === true ){
             overlay.className = 'win';
             gameOverMsg.textContent = "Congratulation! You Win!"
             overlay.style.display = 'block';
@@ -127,7 +127,7 @@ class Game {
         
         lostLifes.forEach( life => {
             life.src="images/liveHeart.png";
-        })
+        });
 
         
     
