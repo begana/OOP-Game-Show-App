@@ -2,68 +2,88 @@
  * Project 4 - OOP Game App
  * Game.js */
 
- class Game {
+class Game {
 
-     constructor(){
+    constructor(){
 
-         this.missed = 0;
-         this.phrases = this.createPhrase();
-         this.activePhrase = null;   
-     }
+    this.missed = 0;
+    this.phrases = this.createPhrase();
+    this.activePhrase = null;   
+    }
 
 
-     createPhrase(){
-         const createPhrase = [
-             new Phrase('construction'),
-             new Phrase('instruction'),
-             new Phrase('assignment'),
-             new Phrase('instantiate'),
-             new Phrase('indicate')
+    createPhrase(){
+        const createPhrase = [
+            new Phrase('i love you'),
+            new Phrase('stay at home'),
+            new Phrase('wash your hands'),
+            new Phrase('step by step'),
+            new Phrase('love yourself')
         ];
-         return createPhrase;
-     }
+        return createPhrase;
+    }
 
 
-     startGame(){
-   
-         const overlay = document.querySelector('#overlay');
-         const selectedPhrase = this.getRandomPhrase();
-         
-         overlay.style.display = 'none';
+    startGame(){
+    
+        const overlay = document.querySelector('#overlay');
+        const selectedPhrase = this.getRandomPhrase();
+        
+        overlay.style.display = 'none';
 
-         selectedPhrase.addPhraseToDisplay();
+        selectedPhrase.addPhraseToDisplay();
 
-         this.activePhrase = selectedPhrase;
+        this.activePhrase = selectedPhrase;
 
-     }
-
-
-     getRandomPhrase(){
-
-         return this.phrases[Math.floor(Math.random() * this.phrases.length)];
-
-     }
+    }
 
 
-     handleInteraction(){}
+    getRandomPhrase(){
 
-     
-     removeLife(){
+        return this.phrases[Math.floor(Math.random() * this.phrases.length)];
+
+    }
+
+
+    handleInteraction(button){
+
+        button.disabled = true;
+    
+
+        if(this.activePhrase.checkLetter(button.textContent) === false){
+            button.className = 'wrong';
+            this.removeLife();
+        } else {
+            button.className = 'chosen';
+            this.activePhrase.showMatchedLetter(button.textContent);
+            this.checkForWin();
+        }
+
+        if( this.checkForWin() === true){
+            this.gameOver(true);
+        }
+
+    }
+
+    
+    removeLife(){
 
         this.missed += 1;
         const scoreboard = document.querySelector('#scoreboard ol');
-        const life = document.querySelector('.tries');
+        const life = document.querySelector('img[src="images/liveHeart.png"]');
+        life.src="images/lostHeart.png";
+        
 
-        scoreboard.removeChild(life);
 
+        
         if( this.missed === 5 ){
             this.gameOver(false);
         }
 
-     }
+    }
 
 
-     checkForWin(){
+    checkForWin(){
 
         const matchedLetters = document.querySelectorAll('.show');
         const matched = matchedLetters.length;
@@ -74,13 +94,16 @@
         } else {
             return false;
         }
-        
-     }
+    
+    }
 
-     gameOver(gameWon){
+    gameOver(gameWon){
 
         const overlay = document.querySelector('#overlay');
         const gameOverMsg = document.querySelector('#game-over-message');
+        const letters = document.querySelectorAll('ul li');
+        const buttons = document.querySelectorAll('button');
+        const lostLifes = document.querySelectorAll('img[src="images/lostHeart.png"]');
 
         if(gameWon === true){
             overlay.className = 'win';
@@ -91,6 +114,22 @@
             gameOverMsg.textContent = "It's Too Bad! Try Again!"
             overlay.style.display = 'block';
         }
+
         
-     }
- }
+        letters.forEach( letter => {
+            letter.remove();
+        });
+
+        buttons.forEach( button => {
+            button.disabled = false;
+            button.className = 'key';
+        });
+        
+        lostLifes.forEach( life => {
+            life.src="images/liveHeart.png";
+        })
+
+        
+    
+    }
+}

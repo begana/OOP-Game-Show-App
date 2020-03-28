@@ -40,15 +40,9 @@
      }
 
 
-
-
-     /* to check the code, copy and paste this code on console
-     game.activePhrase.showMatchedLetter('a')
-     */ 
      showMatchedLetter(letter){
 
         const phraseLetters = document.querySelectorAll('.letter');
-        console.log(phraseLetters);
 
         phraseLetters.forEach( phraseLetter => {
             if(phraseLetter.textContent === letter){
